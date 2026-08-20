@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
       setTimeout(function () {
         loadingScreen.style.display = "none";
       }, 800); // 800ms matches the CSS fade transition time
-    }, 3000); // 3 seconds delay
+    }, 2000); // 2 seconds delay
   } else {
     console.error("Bug Alert: #loading-screen element was not found in HTML!");
   }
