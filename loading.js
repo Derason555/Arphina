@@ -1,41 +1,47 @@
-window.addEventListener("load", function () {
-  const loadingScreen = document.getElementById("loading-screen");
-
-  setTimeout(function () {
-    loadingScreen.classList.add("fade-out");
-  }, 3000); // <-- Change this to 3000 to hold it for 3 seconds on refresh!
-});
-// Force loading screen to stay visible for 4 seconds so you can see it
 document.addEventListener("DOMContentLoaded", function () {
+  
+  // ==========================================
+  // 1. LOADING SCREEN LOGIC
+  // ==========================================
   const loadingScreen = document.getElementById("loading-screen");
-
+  
   if (loadingScreen) {
-    // Reset opacity and display just in case
-    loadingScreen.style.opacity = "1";
+    // Force the loader to be visible initially
     loadingScreen.style.display = "flex";
+    loadingScreen.style.opacity = "1";
 
+    // Wait 3 seconds, then trigger the fade-out
     setTimeout(function () {
       loadingScreen.classList.add("fade-out");
-    }, 4000); // 4 seconds delay
+      
+      // Completely hide it after transition finishes so it doesn't block clicks
+      setTimeout(function () {
+        loadingScreen.style.display = "none";
+      }, 800); // 800ms matches the CSS fade transition time
+    }, 3000); // 3 seconds delay
+  } else {
+    console.error("Bug Alert: #loading-screen element was not found in HTML!");
   }
-});
-// Wait until DOM is fully loaded
-document.addEventListener("DOMContentLoaded", function () {
-    const menuBtn = document.getElementById("menu-btn");
-    const closeBtn = document.getElementById("close-menu");
-    const mobileMenu = document.getElementById("mobile-menu");
 
-    // Open Menu
-    if (menuBtn && mobileMenu) {
-        menuBtn.addEventListener("click", function () {
-            mobileMenu.classList.add("show-menu");
-        });
-    }
+  // ==========================================
+  // 2. MOBILE MENU LOGIC
+  // ==========================================
+  const menuBtn = document.getElementById("menu-btn");
+  const closeBtn = document.getElementById("close-menu");
+  const mobileMenu = document.getElementById("mobile-menu");
 
-    // Close Menu
-    if (closeBtn && mobileMenu) {
-        closeBtn.addEventListener("click", function () {
-            mobileMenu.classList.remove("show-menu");
-        });
-    }
+  // Open Menu
+  if (menuBtn && mobileMenu) {
+    menuBtn.addEventListener("click", function () {
+      mobileMenu.classList.add("show-menu");
+    });
+  }
+
+  // Close Menu
+  if (closeBtn && mobileMenu) {
+    closeBtn.addEventListener("click", function () {
+      mobileMenu.classList.remove("show-menu");
+    });
+  }
+
 });
